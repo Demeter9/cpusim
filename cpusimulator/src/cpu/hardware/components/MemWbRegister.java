@@ -1,15 +1,15 @@
-package cpu.components;
+package cpu.hardware.components;
 
 /**
- * This class represents the intermediate register EX/MEM that holds all information
- * from the last EX stage. Results from execute stage are copied here by memory stage
- * so that they can be carried over before being overwritten by the next EX stage.
+ * This class represents the intermediate register MEM/WB that holds all information
+ * from the last memory stage. Since at the memory stage data are copied here from
+ * the EX/MEM register, the WB stage can use them to update data registers.
  * 
  * @author DLadakis
  * @version 23-08-2017
  */
 
-public class ExMemRegister {
+public class MemWbRegister {
 	
 	// Explained in ArithmeticLU class
 	private String writeBackFlag;
@@ -17,23 +17,30 @@ public class ExMemRegister {
 	private int outputRegister;
 	private String memoryRegister;
 	private int memoryLocation;
+	private int loadedData;
 	private boolean compareFlag;
 	
-	
 	/**
-	 * Constructor
+	 * constructor
 	 */
-	public ExMemRegister(){
+	public MemWbRegister(){
 		writeBackFlag ="";
 		outputRegister = 0;
 	}
 	
 	/**
 	 * Stores the register that will be updated at the write back stage
-	 * @return writeBack flag 
+	 * @return writeBack flag
 	 */
 	public String getWriteBackFlag() {
 		return writeBackFlag;
+	}
+	/**
+	 * Type of operation
+	 * @return
+	 */
+	public String getOperation() {
+		return operation;
 	}
 	/**
 	 * Gets the output of an ALU operation
@@ -43,31 +50,30 @@ public class ExMemRegister {
 		return outputRegister;
 	}
 	/**
-	 * @return type of operation
-	 */
-	public String getOperation(){
-		return operation;
-	}
-	/**
 	 * @return memoryRegister
 	 */
-	public String getMemoryRegister(){
+	public String getMemoryRegister() {
 		return memoryRegister;
 	}
 	/**
 	 * @return memoryLocation
 	 */
-	public int getMemoryLocation(){
+	public int getMemoryLocation() {
 		return memoryLocation;
 	}
-	/** 
+	/**
+	 * @return loadedData
+	 */
+	public int getLoadedData() {
+		return loadedData;
+	}
+	/**
 	 * @return compareFlag
 	 */
 	public boolean isCompareFlag() {
 		return compareFlag;
 	}
 	
-
 	/**
 	 * This method sets the values of the appropriate fields, all at one go.
 	 * @param writeBackFlag
@@ -83,6 +89,22 @@ public class ExMemRegister {
 		this.operation = operation;
 		this.memoryRegister = memoryRegister;
 		this.memoryLocation = memoryLocation;
+		this.compareFlag = compareFlag;
+	}
+	
+	/**
+	 * Sets the loaded data field, since it needs to be set separately during memory stage
+	 * @param loadedData
+	 */
+	public void setLoadedData(int loadedData) {
+		this.loadedData = loadedData;
+	}
+	
+	/**
+	 * Sets compare flag 
+	 * @param compareFlag
+	 */
+	public void setCompareFlag(boolean compareFlag) {
 		this.compareFlag = compareFlag;
 	}
 

@@ -1,4 +1,4 @@
-package cpu.components;
+package cpu.hardware.components;
 
 /**
  * The class holding the main method that puts together components from all classes.

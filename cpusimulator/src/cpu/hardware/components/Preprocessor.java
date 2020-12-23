@@ -1,4 +1,4 @@
-package cpu.components;
+package cpu.hardware.components;
 
 import java.io.*;
 import java.util.Scanner;

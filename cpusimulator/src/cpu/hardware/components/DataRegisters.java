@@ -1,4 +1,4 @@
-package cpu.components;
+package cpu.hardware.components;
 
 /**
  * This is the class that holds the four registers accessible to the user.
