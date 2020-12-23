@@ -48,7 +48,7 @@ public class ArithmeticLogicUnit {
 	 * @param p An instance of the Preprocessor class
 	 * @param em An instance of the ExMemRegister class
 	 */
-	public void execute(ControlUnit c, DataRegisters d, Preprocessor p, ExeMemRegister em, MemWbRegister mw){
+	public void execute(ControlUnit c, DataRegisters d, Preprocessor p, ExeMemRegister em, MemWriRegister mw){
 		if(c.getOperator().equals("ADD") && c.isSecondOperandNu() && c.isThirdOperandNu()){
 			writeBackFlag = c.getFirstOperand();
 			inputRegisterA = c.getSecondOperandNu();
@@ -176,7 +176,7 @@ public class ArithmeticLogicUnit {
 	 * @param em Instance of ExMemRegister class
 	 * @param mw Instance of MemWBRegister class
 	 */
-	public void mem(Memory m, DataRegisters d, ExeMemRegister em, MemWbRegister mw){
+	public void mem(Memory m, DataRegisters d, ExeMemRegister em, MemWriRegister mw){
 		
 		if (em.getOperation().equals("load")){
 			
@@ -196,7 +196,7 @@ public class ArithmeticLogicUnit {
 	 * Uses information from MEM/WB register to update the values of data registers
 	 * The registers are updated only when there are load or numeric type instructions.
 	 */
-	public void writeBack(DataRegisters d, MemWbRegister mw){
+	public void writeBack(DataRegisters d, MemWriRegister mw){
 			
 		if(mw.getOperation().equals("load")){
 			d.setRegister(mw.getLoadedData(), mw.getMemoryRegister());

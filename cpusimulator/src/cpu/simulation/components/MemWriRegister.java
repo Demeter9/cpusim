@@ -9,7 +9,7 @@ package cpu.simulation.components;
  * @version 23-08-2017
  */
 
-public class MemWbRegister {
+public class MemWriRegister {
 	
 	// Explained in ArithmeticLU class
 	private String writeBackFlag;
@@ -23,7 +23,7 @@ public class MemWbRegister {
 	/**
 	 * constructor
 	 */
-	public MemWbRegister(){
+	public MemWriRegister(){
 		writeBackFlag ="";
 		outputRegister = 0;
 	}

@@ -33,7 +33,7 @@ public class Processor {
 		ControlUnit c = new ControlUnit();
 		Preprocessor p = new Preprocessor();
 		ExeMemRegister em = new ExeMemRegister();
-		MemWbRegister mw = new MemWbRegister();
+		MemWriRegister mw = new MemWriRegister();
 		// loading instructions to memory through the preprocessor
 		m.loadInstructionsFromFile(filePath, p);
 		try {
@@ -67,7 +67,7 @@ public class Processor {
 		ControlUnit c = new ControlUnit();
 		Preprocessor p = new Preprocessor();
 		ExeMemRegister em = new ExeMemRegister();
-		MemWbRegister mw = new MemWbRegister();
+		MemWriRegister mw = new MemWriRegister();
 		// loading instructions to memory through the preprocessor
 		m.loadInstructionsFromFile(filePath, p);
 		try{
