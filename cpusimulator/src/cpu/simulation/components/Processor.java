@@ -17,11 +17,7 @@ public class Processor {
 	public static void main(String[] args) {
 		
 		if(args[1].equals(SEQUENCIAL_MODE)){
-			sequential(args[0]);
-			
-			
-			
-			
+			sequential(args[0]);	
 		}else if(args[1].equals(PIPELINE_MODE)){
 				pipeline(args[0]);
 		}
