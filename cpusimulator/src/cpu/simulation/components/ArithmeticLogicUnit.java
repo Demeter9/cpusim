@@ -48,7 +48,7 @@ public class ArithmeticLogicUnit {
 	 * @param p An instance of the Preprocessor class
 	 * @param em An instance of the ExMemRegister class
 	 */
-	public void execute(ControlUnit c, DataRegisters d, Preprocessor p, ExMemRegister em, MemWbRegister mw){
+	public void execute(ControlUnit c, DataRegisters d, Preprocessor p, ExeMemRegister em, MemWbRegister mw){
 		if(c.getOperator().equals("ADD") && c.isSecondOperandNu() && c.isThirdOperandNu()){
 			writeBackFlag = c.getFirstOperand();
 			inputRegisterA = c.getSecondOperandNu();
@@ -176,7 +176,7 @@ public class ArithmeticLogicUnit {
 	 * @param em Instance of ExMemRegister class
 	 * @param mw Instance of MemWBRegister class
 	 */
-	public void mem(Memory m, DataRegisters d, ExMemRegister em, MemWbRegister mw){
+	public void mem(Memory m, DataRegisters d, ExeMemRegister em, MemWbRegister mw){
 		
 		if (em.getOperation().equals("load")){
 			

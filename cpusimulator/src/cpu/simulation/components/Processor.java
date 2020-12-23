@@ -32,7 +32,7 @@ public class Processor {
 		Memory m = new Memory();
 		ControlUnit c = new ControlUnit();
 		Preprocessor p = new Preprocessor();
-		ExMemRegister em = new ExMemRegister();
+		ExeMemRegister em = new ExeMemRegister();
 		MemWbRegister mw = new MemWbRegister();
 		// loading instructions to memory through the preprocessor
 		m.loadInstructionsFromFile(filePath, p);
@@ -66,7 +66,7 @@ public class Processor {
 		Memory m = new Memory();
 		ControlUnit c = new ControlUnit();
 		Preprocessor p = new Preprocessor();
-		ExMemRegister em = new ExMemRegister();
+		ExeMemRegister em = new ExeMemRegister();
 		MemWbRegister mw = new MemWbRegister();
 		// loading instructions to memory through the preprocessor
 		m.loadInstructionsFromFile(filePath, p);

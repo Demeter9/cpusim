@@ -9,7 +9,7 @@ package cpu.simulation.components;
  * @version 23-08-2017
  */
 
-public class ExMemRegister {
+public class ExeMemRegister {
 	
 	// Explained in ArithmeticLU class
 	private String writeBackFlag;
@@ -23,7 +23,7 @@ public class ExMemRegister {
 	/**
 	 * Constructor
 	 */
-	public ExMemRegister(){
+	public ExeMemRegister(){
 		writeBackFlag ="";
 		outputRegister = 0;
 	}
