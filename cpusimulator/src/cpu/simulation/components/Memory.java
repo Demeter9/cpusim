@@ -1,4 +1,4 @@
-package cpu.hardware.components;
+package cpu.simulation.components;
 
 /**
  * Holds the two memory types I-cache and D-cache

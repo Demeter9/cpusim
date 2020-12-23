@@ -1,4 +1,4 @@
-package cpu.hardware.components;
+package cpu.simulation.components;
 
 /**
  * This class contains the execute, memory, writeBack methods (stages).
