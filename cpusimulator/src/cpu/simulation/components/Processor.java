@@ -9,17 +9,20 @@ import cpu.simulation.software.Preprocessor;
  * @version 23-08-2017
  */
 
-public class Processor { 
+public class Processor {
+	
+	private static final String SEQUENCIAL_MODE = "seq";
+	private static final String PIPELINE_MODE = "5dp";
 	
 	public static void main(String[] args) {
 		
-		if(args[1].equals("seq")){
+		if(args[1].equals(SEQUENCIAL_MODE)){
 			sequential(args[0]);
 			
 			
 			
 			
-		}else if(args[1].equals("5dp")){
+		}else if(args[1].equals(PIPELINE_MODE)){
 				pipeline(args[0]);
 		}
 	}	
