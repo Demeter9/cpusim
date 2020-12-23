@@ -8,7 +8,7 @@
  * @date 18-08-2018 
  */
 
-package cpu.logiccomponents;
+package cpu.simulation.logic.components;
 
 public class Gates {
 	

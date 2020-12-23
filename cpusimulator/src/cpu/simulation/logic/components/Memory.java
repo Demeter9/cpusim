@@ -5,7 +5,7 @@
  * @date 04-09-2018
  */
 
-package cpu.logiccomponents;
+package cpu.simulation.logic.components;
 
 
 public class Memory {

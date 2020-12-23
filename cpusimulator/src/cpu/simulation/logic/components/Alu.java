@@ -1,4 +1,4 @@
-package cpu.logiccomponents;
+package cpu.simulation.logic.components;
 
 import java.util.Arrays;
 

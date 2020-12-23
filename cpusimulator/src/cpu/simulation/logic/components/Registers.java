@@ -2,7 +2,7 @@
  * 32 bit data registers (a long-word of space)
  */
 
-package cpu.logiccomponents;
+package cpu.simulation.logic.components;
 
 public class Registers {
 

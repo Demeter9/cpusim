@@ -7,7 +7,7 @@
  * @author  DLadakis
  * @date 04-09-2018 
  */
-package cpu.logiccomponents;
+package cpu.simulation.logic.components;
 
 import java.util.Arrays;
 
