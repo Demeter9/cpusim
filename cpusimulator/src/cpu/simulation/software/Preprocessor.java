@@ -1,4 +1,4 @@
-package cpu.simulation.components;
+package cpu.simulation.software;
 
 import java.io.*;
 import java.util.Scanner;

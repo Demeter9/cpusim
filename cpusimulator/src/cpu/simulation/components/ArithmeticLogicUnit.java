@@ -1,5 +1,7 @@
 package cpu.simulation.components;
 
+import cpu.simulation.software.Preprocessor;
+
 /**
  * This class contains the execute, memory, writeBack methods (stages).
  * and some components such as the input and output registers of the ALU.

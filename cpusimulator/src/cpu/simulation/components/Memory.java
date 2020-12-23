@@ -1,5 +1,7 @@
 package cpu.simulation.components;
 
+import cpu.simulation.software.Preprocessor;
+
 /**
  * Holds the two memory types I-cache and D-cache
  * 

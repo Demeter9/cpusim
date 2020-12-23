@@ -1,5 +1,7 @@
 package cpu.simulation.components;
 
+import cpu.simulation.software.Preprocessor;
+
 /**
  * The class holding the main method that puts together components from all classes.
  * 
