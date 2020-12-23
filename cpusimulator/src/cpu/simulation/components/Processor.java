@@ -28,7 +28,7 @@ public class Processor {
 		int cycles = 0;
 		// Instantiating classes
 		DataRegisters d = new DataRegisters();
-		ArithmeticLU a = new ArithmeticLU();
+		ArithmeticLogicUnit a = new ArithmeticLogicUnit();
 		Memory m = new Memory();
 		ControlUnit c = new ControlUnit();
 		Preprocessor p = new Preprocessor();
@@ -62,7 +62,7 @@ public class Processor {
 		int cycles = 0;
 		// Instantiating classes
 		DataRegisters d = new DataRegisters();
-		ArithmeticLU a = new ArithmeticLU();
+		ArithmeticLogicUnit a = new ArithmeticLogicUnit();
 		Memory m = new Memory();
 		ControlUnit c = new ControlUnit();
 		Preprocessor p = new Preprocessor();

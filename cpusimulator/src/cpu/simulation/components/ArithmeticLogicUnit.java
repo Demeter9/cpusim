@@ -8,7 +8,7 @@ package cpu.simulation.components;
  * @version 23-08-2017
  */
 
-public class ArithmeticLU {
+public class ArithmeticLogicUnit {
 	
 	// These registers store input and output of arithmetic operations
 	private int inputRegisterA;
@@ -30,7 +30,7 @@ public class ArithmeticLU {
 	/**
 	 * Constructor
 	 */
-	public ArithmeticLU(){
+	public ArithmeticLogicUnit(){
 		operation = "";
 		writeBackFlag = "";
 		memoryRegister = "";
