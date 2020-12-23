@@ -1,4 +1,4 @@
-package cpu.simulation.logic.components;
+package cpu.simulation.software;
 import java.util.Arrays;
 
 public class Interphase {
