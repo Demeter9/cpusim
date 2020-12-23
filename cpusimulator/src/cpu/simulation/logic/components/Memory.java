@@ -7,6 +7,7 @@
 
 package cpu.simulation.logic.components;
 
+import cpu.api.Gates;
 
 public class Memory {
 

@@ -11,6 +11,8 @@ package cpu.simulation.logic.components;
 
 import java.util.Arrays;
 
+import cpu.api.Gates;
+
 public class ControlUnit {
 	
     /**
