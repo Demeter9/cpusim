@@ -7,7 +7,7 @@ package cpu.components;
  * @version 23-08-2017
  */
 
-public class Cpu { 
+public class Processor { 
 	
 	public static void main(String[] args) {
 		
