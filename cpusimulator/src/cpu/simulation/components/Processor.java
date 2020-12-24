@@ -41,9 +41,9 @@ public class Processor {
 			while(c.getProgramCounter()<m.instructionsInMemory()){
 				c.fetch(c.getProgramCounter(), m);
 				c.decode();
-				a.execute(c, d, p, em, mw);
-				a.memory(m, d, em, mw);
-				a.writeBack(d, mw);
+				c.execute(d, p, em, mw, a);
+				c.memory(m, d, em, mw);
+				c.writeBack(d, mw);
 				cycles++;
 			}
 		}catch (NullPointerException e) {
@@ -78,37 +78,37 @@ public class Processor {
 			c.decode();    
 			c.fetch(c.getProgramCounter(), m);
 			cycles++;
-			a.execute(c, d, p, em, mw);
+			c.execute(d, p, em, mw, a);
 			c.decode();		   
 			c.fetch(c.getProgramCounter(), m);
 			cycles++;
-			a.memory(m, d, em, mw);
-			a.execute(c, d, p, em, mw);
+			c.memory(m, d, em, mw);
+			c.execute(d, p, em, mw, a);
 			c.decode();
 			c.fetch(c.getProgramCounter(), m);
 			cycles++;
 			int entryProgramCounter=c.getProgramCounter();
 			for(int i = 1; i<=m.instructionsInMemory()-entryProgramCounter; i++){
-				a.writeBack(d, mw);
-				a.memory(m, d, em, mw);
-				a.execute(c, d, p, em, mw);
+				c.writeBack(d, mw);
+				c.memory(m, d, em, mw);
+				c.execute(d, p, em, mw, a);
 				c.decode();
 				c.fetch(c.getProgramCounter(), m);
 				cycles++;
 			}
-			a.writeBack(d, mw);
-			a.memory(m, d, em, mw);
-			a.execute(c, d, p, em, mw);
+			c.writeBack(d, mw);
+			c.memory(m, d, em, mw);
+			c.execute(d, p, em, mw, a);
 			c.decode();
 			cycles++;
-			a.writeBack(d, mw);
-			a.memory(m, d, em, mw);
-			a.execute(c, d, p, em, mw);
+			c.writeBack(d, mw);
+			c.memory(m, d, em, mw);
+			c.execute(d, p, em, mw, a);
 			cycles++;
-			a.writeBack(d, mw);
-			a.memory(m, d, em, mw);
+			c.writeBack(d, mw);
+			c.memory(m, d, em, mw);
 			cycles++;
-			a.writeBack(d, mw);
+			c.writeBack(d, mw);
 			cycles++;
 			}
 		}catch (NullPointerException e){
