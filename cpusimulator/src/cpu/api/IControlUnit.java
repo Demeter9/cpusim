@@ -20,4 +20,8 @@ public interface IControlUnit {
 	
 	public void jump(String label, Preprocessor p);
 	
+	public void load();
+	
+	public void store();
+	
 }
