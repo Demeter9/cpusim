@@ -178,7 +178,7 @@ public class ArithmeticLogicUnit {
 	 * @param em Instance of ExMemRegister class
 	 * @param mw Instance of MemWBRegister class
 	 */
-	public void mem(Memory m, DataRegisters d, ExeMemRegister em, MemWriRegister mw){
+	public void memory(Memory m, DataRegisters d, ExeMemRegister em, MemWriRegister mw){
 		
 		if (em.getOperation().equals("load")){
 			

@@ -42,7 +42,7 @@ public class Processor {
 				c.fetch(c.getProgramCounter(), m);
 				c.decode();
 				a.execute(c, d, p, em, mw);
-				a.mem(m, d, em, mw);
+				a.memory(m, d, em, mw);
 				a.writeBack(d, mw);
 				cycles++;
 			}
@@ -82,7 +82,7 @@ public class Processor {
 			c.decode();		   
 			c.fetch(c.getProgramCounter(), m);
 			cycles++;
-			a.mem(m, d, em, mw);
+			a.memory(m, d, em, mw);
 			a.execute(c, d, p, em, mw);
 			c.decode();
 			c.fetch(c.getProgramCounter(), m);
@@ -90,23 +90,23 @@ public class Processor {
 			int entryProgramCounter=c.getProgramCounter();
 			for(int i = 1; i<=m.instructionsInMemory()-entryProgramCounter; i++){
 				a.writeBack(d, mw);
-				a.mem(m, d, em, mw);
+				a.memory(m, d, em, mw);
 				a.execute(c, d, p, em, mw);
 				c.decode();
 				c.fetch(c.getProgramCounter(), m);
 				cycles++;
 			}
 			a.writeBack(d, mw);
-			a.mem(m, d, em, mw);
+			a.memory(m, d, em, mw);
 			a.execute(c, d, p, em, mw);
 			c.decode();
 			cycles++;
 			a.writeBack(d, mw);
-			a.mem(m, d, em, mw);
+			a.memory(m, d, em, mw);
 			a.execute(c, d, p, em, mw);
 			cycles++;
 			a.writeBack(d, mw);
-			a.mem(m, d, em, mw);
+			a.memory(m, d, em, mw);
 			cycles++;
 			a.writeBack(d, mw);
 			cycles++;
