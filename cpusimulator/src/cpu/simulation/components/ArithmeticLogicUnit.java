@@ -3,11 +3,11 @@ package cpu.simulation.components;
 import cpu.api.IArithmeticLogicUnit;
 
 /**
- * This class contains the execute, memory, writeBack methods (stages).
- * and some components such as the input and output registers of the ALU.
+ * This class encapsulates all the numeric operations that take
+ * place in an ALU
  * 
  * @author DLadakis
- * @version 23-08-2017
+ * @version 24-12-2020
  */
 
 public class ArithmeticLogicUnit implements IArithmeticLogicUnit {
@@ -30,19 +30,19 @@ public class ArithmeticLogicUnit implements IArithmeticLogicUnit {
 	
 	@Override
 	public void sum(int a, int b){
-		outputRegister = a+b;
+		outputRegister = a + b;
 	}
 	
 	@Override
 	public void sub(int a, int b){
-		outputRegister = a-b;
+		outputRegister = a - b;
 	}
 	
 	@Override
 	public void compare(int a, int b){
-		if (a<b){
+		if (a < b){
 			compareFlag = true;
-		}else if (a==b){
+		}else if (a == b){
 			compareFlag = false;
 		}
 	}

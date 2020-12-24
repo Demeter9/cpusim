@@ -6,10 +6,11 @@ import cpu.api.IControlUnit;
 import cpu.simulation.software.Preprocessor;
 
 /**
- * Holds fetch and decode methods, the PC and the instruction register.
+ * The orchestrator of the simulator implements all the stages of of the
+ * CPU pipeline
  * 
  * @author DLadakis
- * @version 23-08-2017
+ * @version 24-12-2020
  */
 
 public class ControlUnit implements IControlUnit {
