@@ -64,11 +64,7 @@ public class ControlUnit implements IControlUnit {
 		decodeArray = new String[4];
 	}
 
-	/**
-	 * Getting an instruction from memory.
-	 * @param i instruction
-	 * @param m instance of memory class
-	 */
+	@Override
 	public void fetch(int i, Memory m){
 		currentInstruction  = i;
 		instructionReg = m.getInstruction(i);
@@ -92,12 +88,7 @@ public class ControlUnit implements IControlUnit {
 		return currentInstruction;
 	}
 
-	/**
-	 * This methods simulates the decode phase of the fetch-decode-execute cycle, by breaking the
-	 * instruction into separate terms. In a way making sense of the instruction. Then is checking
-	 * whether second and third operands are numerical strings or not and if yes, they are
-	 * parsed into numbers.  
-	 */
+	@Override
 	public void decode(){
 		decodeArray = instructionReg.split(" ");
 		operator = decodeArray[0];

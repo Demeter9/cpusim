@@ -9,8 +9,19 @@ import cpu.simulation.software.Preprocessor;
 
 public interface IControlUnit {
 
+	/**
+	 * Getting an instruction from memory.
+	 * @param i instruction
+	 * @param m instance of memory class
+	 */
 	public void fetch(int i, Memory m);
 	
+	/**
+	 * This methods simulates the decode phase of the fetch-decode-execute cycle, by breaking the
+	 * instruction into separate terms. In a way making sense of the instruction. Then is checking
+	 * whether second and third operands are numerical strings or not and if yes, they are
+	 * parsed into numbers.  
+	 */
 	public void decode();
 	
 	/**
