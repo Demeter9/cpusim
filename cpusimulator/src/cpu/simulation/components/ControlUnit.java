@@ -65,9 +65,9 @@ public class ControlUnit implements IControlUnit {
 	}
 
 	@Override
-	public void fetch(int i, Memory m){
-		currentInstruction  = i;
-		instructionReg = m.getInstruction(i);
+	public void fetch(Memory m){
+		currentInstruction  = pc;
+		instructionReg = m.getInstruction(pc);
 		pc++;
 	}
 	

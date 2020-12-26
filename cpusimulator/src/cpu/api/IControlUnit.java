@@ -11,10 +11,9 @@ public interface IControlUnit {
 
 	/**
 	 * Getting an instruction from memory.
-	 * @param i instruction
 	 * @param m instance of memory class
 	 */
-	public void fetch(int i, Memory m);
+	public void fetch(Memory m);
 	
 	/**
 	 * This methods simulates the decode phase of the fetch-decode-execute cycle, by breaking the

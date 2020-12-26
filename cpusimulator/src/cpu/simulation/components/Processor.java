@@ -39,7 +39,7 @@ public class Processor {
 		m.loadInstructionsFromFile(filePath, p);
 		try {
 			while(c.getProgramCounter()<m.instructionsInMemory()){
-				c.fetch(c.getProgramCounter(), m);
+				c.fetch(m);
 				c.decode();
 				c.execute(d, p, em, mw, a);
 				c.memory(m, d, em, mw);
@@ -73,19 +73,19 @@ public class Processor {
 		m.loadInstructionsFromFile(filePath, p);
 		try{
 			while(c.getProgramCounter()<m.instructionsInMemory()){
-			c.fetch(c.getProgramCounter(), m);
+			c.fetch(m);
 			cycles++;
 			c.decode();    
-			c.fetch(c.getProgramCounter(), m);
+			c.fetch(m);
 			cycles++;
 			c.execute(d, p, em, mw, a);
 			c.decode();		   
-			c.fetch(c.getProgramCounter(), m);
+			c.fetch(m);
 			cycles++;
 			c.memory(m, d, em, mw);
 			c.execute(d, p, em, mw, a);
 			c.decode();
-			c.fetch(c.getProgramCounter(), m);
+			c.fetch(m);
 			cycles++;
 			int entryProgramCounter=c.getProgramCounter();
 			for(int i = 1; i<=m.instructionsInMemory()-entryProgramCounter; i++){
@@ -93,7 +93,7 @@ public class Processor {
 				c.memory(m, d, em, mw);
 				c.execute(d, p, em, mw, a);
 				c.decode();
-				c.fetch(c.getProgramCounter(), m);
+				c.fetch(m);
 				cycles++;
 			}
 			c.writeBack(d, mw);
