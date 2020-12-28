@@ -89,8 +89,11 @@ public class ControlUnit implements IControlUnit {
 	}
 
 	@Override
-	public void decode(){
-		decodeArray = instructionReg.split(" ");
+	public void decode(FetchDecRegister fd){
+		//first copy data from fetch to FETCH/DECODE register
+		fd.copyData(instructionReg, pc);
+		//do decode stuff
+		decodeArray = fd.getInstruction().split(" ");
 		operator = decodeArray[0];
 		firstOperand = decodeArray[1];
 		secondOperand = decodeArray[2];
@@ -200,80 +203,85 @@ public class ControlUnit implements IControlUnit {
 
 	@Override
 	public void execute(DataRegisters dataReg, Preprocessor p, ExeMemRegister exeMem,
-			MemWriRegister memWri, ArithmeticLogicUnit alu) {
-		if(getOperator().equals("ADD") && isSecondOperandNu() && isThirdOperandNu()){
-			writeBackFlag = getFirstOperand();
-			alu.setInputRegisterA(getSecondOperandNu());
-			alu.setInputRegisterB(getThirdOperandNu());
+			MemWriRegister memWri, ArithmeticLogicUnit alu, DecExeRegister de) {
+		
+		//transfer data from one pipeline register (FETCH/DECODE) to the next (DECODE/EXECUTE)
+		de.copyData(operator, firstOperand, secondOperand, thirdOperand,
+				secondOperandNu, thirdOperandNu, isSecondOperandNu, isThirdOperandNu);
+		
+		if(de.getOperator().equals("ADD") && de.isSecondOperandNu() && de.isThirdOperandNu()){
+			writeBackFlag = de.getFirstOperand();
+			alu.setInputRegisterA(de.getSecondOperandNu());
+			alu.setInputRegisterB(de.getThirdOperandNu());
 			alu.sum(alu.getInputRegisterA(), alu.getInputRegisterB());
 			operation = "numeric";
-		}else if(getOperator().equals("ADD") && !isSecondOperandNu() && !isThirdOperandNu()){
-			writeBackFlag = getFirstOperand();
-			alu.setInputRegisterA(dataReg.getRegister(getSecondOperand()));
-			alu.setInputRegisterB(dataReg.getRegister(getThirdOperand()));
+		}else if(de.getOperator().equals("ADD") && !de.isSecondOperandNu() && !de.isThirdOperandNu()){
+			writeBackFlag = de.getFirstOperand();
+			alu.setInputRegisterA(dataReg.getRegister(de.getSecondOperand()));
+			alu.setInputRegisterB(dataReg.getRegister(de.getThirdOperand()));
 			alu.sum(alu.getInputRegisterA(), alu.getInputRegisterB());
 			operation = "numeric";
-		}else if(getOperator().equals("ADD") && !isSecondOperandNu() && isThirdOperandNu()){
-			writeBackFlag = getFirstOperand();
-			alu.setInputRegisterA(dataReg.getRegister(getSecondOperand()));
-			alu.setInputRegisterB(getThirdOperandNu());
+		}else if(de.getOperator().equals("ADD") && !de.isSecondOperandNu() && de.isThirdOperandNu()){
+			writeBackFlag = de.getFirstOperand();
+			alu.setInputRegisterA(dataReg.getRegister(de.getSecondOperand()));
+			alu.setInputRegisterB(de.getThirdOperandNu());
 			alu.sum(alu.getInputRegisterA(), alu.getInputRegisterB());
 			operation = "numeric";
-		}else if(getOperator().equals("ADD") && isSecondOperandNu() && !isThirdOperandNu()){
-			writeBackFlag = getFirstOperand();
-			alu.setInputRegisterA(getSecondOperandNu());
-			alu.setInputRegisterB(dataReg.getRegister(getThirdOperand()));
+		}else if(de.getOperator().equals("ADD") && de.isSecondOperandNu() && !de.isThirdOperandNu()){
+			writeBackFlag = de.getFirstOperand();
+			alu.setInputRegisterA(de.getSecondOperandNu());
+			alu.setInputRegisterB(dataReg.getRegister(de.getThirdOperand()));
 			alu.sum(alu.getInputRegisterA(), alu.getInputRegisterB());
 			operation = "numeric";
-		}else if(getOperator().equals("SUB") && isSecondOperandNu() && isThirdOperandNu()){
-			writeBackFlag = getFirstOperand();
-			alu.setInputRegisterA(getSecondOperandNu());
-			alu.setInputRegisterB(getThirdOperandNu());
+		}else if(de.getOperator().equals("SUB") && de.isSecondOperandNu() && de.isThirdOperandNu()){
+			writeBackFlag = de.getFirstOperand();
+			alu.setInputRegisterA(de.getSecondOperandNu());
+			alu.setInputRegisterB(de.getThirdOperandNu());
 			alu.sub(alu.getInputRegisterA(), alu.getInputRegisterB());
 			operation = "numeric";
-		}else if(getOperator().equals("SUB") && !isSecondOperandNu() && !isThirdOperandNu()){
-			writeBackFlag = getFirstOperand();
-			if(memWri.getWriteBackFlag().equals(getSecondOperand())){  // Detect dependency 
+		}else if(de.getOperator().equals("SUB") && !de.isSecondOperandNu() && !de.isThirdOperandNu()){
+			writeBackFlag = de.getFirstOperand();
+			if(memWri.getWriteBackFlag().equals(de.getSecondOperand())){  // Detect dependency 
 				alu.setInputRegisterA(memWri.getOutputRegister());
 			}else{
-				alu.setInputRegisterA(dataReg.getRegister(getSecondOperand()));
+				alu.setInputRegisterA(dataReg.getRegister(de.getSecondOperand()));
 			}
-			alu.setInputRegisterB(dataReg.getRegister(getThirdOperand()));
+			alu.setInputRegisterB(dataReg.getRegister(de.getThirdOperand()));
 			alu.sub(alu.getInputRegisterA(), alu.getInputRegisterB());
 			operation = "numeric";
-		}else if(getOperator().equals("SUB") && !isSecondOperandNu() && isThirdOperandNu()){
-			writeBackFlag = getFirstOperand();
-			alu.setInputRegisterA(dataReg.getRegister(getSecondOperand()));
-			alu.setInputRegisterB(getThirdOperandNu());
+		}else if(de.getOperator().equals("SUB") && !de.isSecondOperandNu() && de.isThirdOperandNu()){
+			writeBackFlag = de.getFirstOperand();
+			alu.setInputRegisterA(dataReg.getRegister(de.getSecondOperand()));
+			alu.setInputRegisterB(de.getThirdOperandNu());
 			alu.sub(alu.getInputRegisterA(), alu.getInputRegisterB());
 			operation = "numeric";
-		}else if(getOperator().equals("SUB") && isSecondOperandNu() && !isThirdOperandNu()){
-			writeBackFlag = getFirstOperand();
-			alu.setInputRegisterA(getSecondOperandNu());
-			alu.setInputRegisterB(dataReg.getRegister(getThirdOperand()));
+		}else if(de.getOperator().equals("SUB") && de.isSecondOperandNu() && !de.isThirdOperandNu()){
+			writeBackFlag = de.getFirstOperand();
+			alu.setInputRegisterA(de.getSecondOperandNu());
+			alu.setInputRegisterB(dataReg.getRegister(de.getThirdOperand()));
 			alu.sub(alu.getInputRegisterA(), alu.getInputRegisterB());
 			operation = "numeric";
-		}else if(getOperator().equals("LOAD")){
+		}else if(de.getOperator().equals("LOAD")){
 			operation = "load";
-			memoryRegister = getFirstOperand();
-			memoryLocation = getSecondOperandNu();
-		}else if (getOperator().equals("STORE")){
+			memoryRegister = de.getFirstOperand();
+			memoryLocation = de.getSecondOperandNu();
+		}else if (de.getOperator().equals("STORE")){
 			operation = "store";
-			memoryRegister = getFirstOperand();
-			memoryLocation = getSecondOperandNu();
-		}else if(getOperator().equals("CMP") && isThirdOperandNu()){
+			memoryRegister = de.getFirstOperand();
+			memoryLocation = de.getSecondOperandNu();
+		}else if(de.getOperator().equals("CMP") && de.isThirdOperandNu()){
 			operation = "cmp";
-			if(memWri.getWriteBackFlag().equals(getSecondOperand())){ // Detect dependency
+			if(memWri.getWriteBackFlag().equals(de.getSecondOperand())){ // Detect dependency
 				alu.setInputRegisterA(memWri.getOutputRegister());
 			}else{
-				alu.setInputRegisterA(dataReg.getRegister(getSecondOperand()));
+				alu.setInputRegisterA(dataReg.getRegister(de.getSecondOperand()));
 			}
-			alu.setInputRegisterB(getThirdOperandNu());
+			alu.setInputRegisterB(de.getThirdOperandNu());
 			alu.compare(alu.getInputRegisterA(), alu.getInputRegisterB());
-		}else if(getOperator().equals("JMP")){
+		}else if(de.getOperator().equals("JMP")){
 			operation = "jmp";
 			if(alu.getCompareFlag()){
-				jump(getFirstOperand(), p);
+				jump(de.getFirstOperand(), p);
 			}
 		}
 		//Copy useful info to the pipeline register (EX/MEM) at the end of execute stage

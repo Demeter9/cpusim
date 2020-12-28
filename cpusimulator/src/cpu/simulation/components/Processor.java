@@ -35,13 +35,15 @@ public class Processor {
 		Preprocessor p = new Preprocessor();
 		ExeMemRegister em = new ExeMemRegister();
 		MemWriRegister mw = new MemWriRegister();
+		FetchDecRegister fd = new FetchDecRegister();
+		DecExeRegister de = new DecExeRegister();
 		// loading instructions to memory through the preprocessor
 		m.loadInstructionsFromFile(filePath, p);
 		try {
 			while(c.getProgramCounter()<m.instructionsInMemory()){
 				c.fetch(m);
-				c.decode();
-				c.execute(d, p, em, mw, a);
+				c.decode(fd);
+				c.execute(d, p, em, mw, a, de);
 				c.memory(m, d, em, mw);
 				c.writeBack(d, mw);
 				cycles++;
@@ -69,41 +71,43 @@ public class Processor {
 		Preprocessor p = new Preprocessor();
 		ExeMemRegister em = new ExeMemRegister();
 		MemWriRegister mw = new MemWriRegister();
+		FetchDecRegister fd = new FetchDecRegister();
+		DecExeRegister de = new DecExeRegister();
 		// loading instructions to memory through the preprocessor
 		m.loadInstructionsFromFile(filePath, p);
 		try{
 			while(c.getProgramCounter()<m.instructionsInMemory()){
 			c.fetch(m);
 			cycles++;
-			c.decode();    
+			c.decode(fd);    
 			c.fetch(m);
 			cycles++;
-			c.execute(d, p, em, mw, a);
-			c.decode();		   
+			c.execute(d, p, em, mw, a, de);
+			c.decode(fd);		   
 			c.fetch(m);
 			cycles++;
 			c.memory(m, d, em, mw);
-			c.execute(d, p, em, mw, a);
-			c.decode();
+			c.execute(d, p, em, mw, a, de);
+			c.decode(fd);
 			c.fetch(m);
 			cycles++;
 			int entryProgramCounter=c.getProgramCounter();
 			for(int i = 1; i<=m.instructionsInMemory()-entryProgramCounter; i++){
 				c.writeBack(d, mw);
 				c.memory(m, d, em, mw);
-				c.execute(d, p, em, mw, a);
-				c.decode();
+				c.execute(d, p, em, mw, a, de);
+				c.decode(fd);
 				c.fetch(m);
 				cycles++;
 			}
 			c.writeBack(d, mw);
 			c.memory(m, d, em, mw);
-			c.execute(d, p, em, mw, a);
-			c.decode();
+			c.execute(d, p, em, mw, a, de);
+			c.decode(fd);
 			cycles++;
 			c.writeBack(d, mw);
 			c.memory(m, d, em, mw);
-			c.execute(d, p, em, mw, a);
+			c.execute(d, p, em, mw, a, de);
 			cycles++;
 			c.writeBack(d, mw);
 			c.memory(m, d, em, mw);
