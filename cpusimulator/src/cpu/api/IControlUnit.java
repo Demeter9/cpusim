@@ -2,9 +2,7 @@ package cpu.api;
 
 import cpu.simulation.components.ArithmeticLogicUnit;
 import cpu.simulation.components.DataRegisters;
-import cpu.simulation.components.DecExeRegister;
 import cpu.simulation.components.ExeMemRegister;
-import cpu.simulation.components.FetchDecRegister;
 import cpu.simulation.components.MemWriRegister;
 import cpu.simulation.components.Memory;
 import cpu.simulation.software.Preprocessor;
@@ -23,7 +21,7 @@ public interface IControlUnit {
 	 * whether second and third operands are numerical strings or not and if yes, they are
 	 * parsed into numbers.  
 	 */
-	public void decode(FetchDecRegister fd);
+	public void decode();
 	
 	/**
 	 * The central method of ALU is performing all the mathematical and logical
@@ -34,7 +32,7 @@ public interface IControlUnit {
 	 * @param mw An instance of MemWriRegister class
 	 */
 	public void execute(DataRegisters d, Preprocessor p, ExeMemRegister em,
-			MemWriRegister mw, ArithmeticLogicUnit alu, DecExeRegister de);
+			MemWriRegister mw, ArithmeticLogicUnit alu);
 	
 	/**
 	 * Dealing with load and store instructions from the last execute stage taking as input 
